@@ -110,11 +110,14 @@ while True:
         cv2.rectangle(screen, top_left, bottom_right, 255, 2)
         print("go right")
         start_time = time.time()
-        while time.time() - start_time < 10:
+        while time.time() - start_time < 17:
             pyautogui.mouseDown(x=top_left[0] + w // 2, y=top_left[1] + h // 2)
-            point_time = time.time()
-            while time.time() - point_time < 0.25:
-                pass
+
+            # point_time = time.time()
+            # while time.time() - point_time <= 0.33:
+            #     pass
+            
+            time.sleep(0.25)
             pyautogui.mouseUp()
             time.sleep(0.5)
         print("stop")
