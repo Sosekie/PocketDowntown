@@ -8,9 +8,11 @@ from find_best_match import find_best_match, find_and_print, find_print_get_posi
 
 def auto_drive(scale_range, top_left_position, bottom_right_position, template, count_times, count_taxi, taxi_star, found_taxi):
 
-    taxi_icon_template, taxi_star_template, taxi_shape_template, go_right_template, go_left_template, continue_template, ok_template, later_template, close_template, get_item_template, items_template, item_notice_template = template
+    taxi_icon_template, taxi_star_template, taxi_shape_template, go_right_template, go_left_template, continue_template, ok_template, later_template, close_template, get_item_template, items_template, item_notice_template, blank_item_template = template
         
     screen, top_left_position, bottom_right_position = get_screenshot(top_left_position, bottom_right_position)
+
+    width = bottom_right_position[0]-top_left_position[0]
 
     # match taxi_icon
     status = "find taxi icon"
@@ -75,16 +77,28 @@ def auto_drive(scale_range, top_left_position, bottom_right_position, template, 
 
             screen, top_left_position, bottom_right_position = get_screenshot(top_left_position, bottom_right_position)
             best_match_val, best_match_loc, best_match_scale, w, h = find_best_match(screen, go_right_template, scale_range)
+            x_right = top_left[0] + w // 2
+            y_right = top_left[1] + h // 2
+
+            x_left = x_right - 9*width//10
+            y_left = y_right
 
             end_time = time.time()
             last_time = end_time - search_time
             print("last_time:", last_time)
             
             if best_match_val > 0.8:
-                pyautogui.mouseDown(x=top_left[0] + w // 2, y=top_left[1] + h // 2)
+                pyautogui.mouseDown(x_right, y_right)
                 time.sleep(0.22)
                 pyautogui.mouseUp()
-                time.sleep(0.5-last_time)
+                pyautogui.mouseDown(x_left, y_left)
+                time.sleep(0.02)
+                pyautogui.mouseUp()
+                # time.sleep(0.5 - last_time - 0.02 - 0.1)
+
+                # should stop at least 0.5 seconds
+                # time.sleep(0.5 - last_time)
+
             else:
                 break
 

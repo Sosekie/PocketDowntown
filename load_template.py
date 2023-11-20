@@ -40,5 +40,8 @@ def load_template():
     # 载入需要进货的图像作为模板
     item_notice_template_path = './image/item_notice.jpg'
     item_notice_template = cv2.imread(item_notice_template_path, 0)
+    # 载入空白商品的图像作为模板
+    blank_item_template_path = './image/blank_item.jpg'
+    blank_item_template = cv2.imread(blank_item_template_path, 0)
 
-    return [taxi_icon_template, taxi_star_template, taxi_shape_template, go_right_template, go_left_template, continue_template, ok_template, later_template, close_template, get_item_template, items_template, item_notice_template]
+    return [taxi_icon_template, taxi_star_template, taxi_shape_template, go_right_template, go_left_template, continue_template, ok_template, later_template, close_template, get_item_template, items_template, item_notice_template, blank_item_template]

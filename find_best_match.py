@@ -36,7 +36,7 @@ def click_item(top_left_position, best_match_loc, best_match_scale, screen, w, h
 
 def find_and_print(screen, taxi_icon_template, scale_range, top_left_position, status):
     best_match_val, best_match_loc, best_match_scale, w, h = find_best_match(screen, taxi_icon_template, scale_range)
-    if best_match_val > 0.8:
+    if best_match_val > 0.90:
         click_item(top_left_position, best_match_loc, best_match_scale, screen, w, h)
         print(status)
         return True
