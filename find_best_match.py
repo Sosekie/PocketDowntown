@@ -13,6 +13,10 @@ def find_best_match(screen, template, scale_range, resize_range = 1):
         resized_screen = cv2.resize(screen, (screen.shape[1] // resize_range, screen.shape[0] // resize_range), interpolation=cv2.INTER_AREA)
         resized_template = cv2.resize(resized_template, (resized_template.shape[1] // resize_range, resized_template.shape[0] // resize_range), interpolation=cv2.INTER_AREA)
 
+        # 对图像进行阈值处理以关注亮色区域
+        # _, resized_screen = cv2.threshold(resized_screen, 30, 255, cv2.THRESH_BINARY)
+        # _, resized_template = cv2.threshold(resized_template, 30, 255, cv2.THRESH_BINARY)
+
         h, w = resized_template.shape
         res = cv2.matchTemplate(resized_screen, resized_template, cv2.TM_CCOEFF_NORMED)
         _, max_val, _, max_loc = cv2.minMaxLoc(res)
@@ -58,3 +62,13 @@ def find_print_get_position(screen, taxi_icon_template, scale_range, top_left_po
         return [True, top_left, bottom_right]
     else:
         return [False]
+    
+def find_print_and_double_click(screen, taxi_icon_template, scale_range, top_left_position, status):
+    best_match_val, best_match_loc, best_match_scale, w, h = find_best_match(screen, taxi_icon_template, scale_range)
+    if best_match_val > 0.8:
+        click_item(top_left_position, best_match_loc, best_match_scale, screen, w, h)
+        click_item(top_left_position, best_match_loc, best_match_scale, screen, w, h)
+        print(status)
+        return True
+    else:
+        return False

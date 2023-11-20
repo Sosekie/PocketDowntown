@@ -27,5 +27,18 @@ def load_template():
     # 载入再说的图像作为模板
     later_template_path = './image/later.jpg'
     later_template = cv2.imread(later_template_path, 0)
+    # 载入关闭的图像作为模板
+    close_template_path = './image/close.jpg'
+    close_template = cv2.imread(close_template_path, 0)
 
-    return taxi_icon_template, taxi_star_template, taxi_shape_template, go_right_template, go_left_template, continue_template, ok_template, later_template
+    # 载入进货的图像作为模板
+    get_item_template_path = './image/get_item.jpg'
+    get_item_template = cv2.imread(get_item_template_path, 0)
+    # 载入货物的图像作为模板
+    items_template_path = './image/items.jpg'
+    items_template = cv2.imread(items_template_path, 0)
+    # 载入需要进货的图像作为模板
+    item_notice_template_path = './image/item_notice.jpg'
+    item_notice_template = cv2.imread(item_notice_template_path, 0)
+
+    return [taxi_icon_template, taxi_star_template, taxi_shape_template, go_right_template, go_left_template, continue_template, ok_template, later_template, close_template, get_item_template, items_template, item_notice_template]
