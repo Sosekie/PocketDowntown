@@ -35,7 +35,7 @@ try:
 
         for j in range(3):
             print("Start Stocking")
-            for i in range(5):
+            for i in range(8):
                 auto_stock(scale_range, top_left_position, bottom_right_position, template)
             print("Start Driving")
             for i in range(2):
