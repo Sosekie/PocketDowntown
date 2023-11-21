@@ -2,4 +2,4 @@ opencv-python
 pyautogui
 keyboard
 numpy
-PIL
+Pillow
