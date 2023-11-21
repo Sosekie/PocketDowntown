@@ -2,6 +2,7 @@ from AutoDriving import auto_drive
 from AutoStocking import auto_stock
 from AutoPeplenishing import back_to_left, auto_replenish, back_to_right
 from load_template import load_template
+from get_screenshot import get_screenshot
 import numpy as np
 import pyautogui
 import keyboard
@@ -11,7 +12,9 @@ import keyboard
 scale_range = np.linspace(0.5, 1.5, 20)
 # define top left and bottom right
 top_left_position, bottom_right_position = None, None
-top_left_position, bottom_right_position = (120, 383), (1312, 970)
+# top_left_position, bottom_right_position = (120, 383), (1312, 970)
+top_left_position, bottom_right_position = (676, 428), (1988, 1077)
+# _, top_left_position, bottom_right_position = get_screenshot(top_left_position, bottom_right_position)
 # get template
 template = load_template()
 
