@@ -106,6 +106,8 @@ def auto_drive(scale_range, top_left_position, bottom_right_position, template, 
             if taxi_star:
                 print("checking star")
                 status = "click ok"
+                time.sleep(0.5)
+                screen, top_left_position, bottom_right_position = get_screenshot(top_left_position, bottom_right_position)
                 if find_and_print(screen, ok_template, scale_range, top_left_position, status):
                     taxi_star = False
 

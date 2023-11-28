@@ -19,8 +19,10 @@ top_left_position, bottom_right_position = (676, 428), (1988, 1077)
 template = load_template()
 
 count_times = 0
-count_taxi = 0
-taxi_star = False
+# count_taxi = np.array(0)
+count_taxi = np.load( "count_taxi.npy" )
+print("This script has already helped you autopilot ", count_taxi, " cars!")
+taxi_star = True
 found_taxi = False
 
 pyautogui.FAILSAFE = True
@@ -36,23 +38,25 @@ try:
     round = 0
     while(True):
 
-        for j in range(3):
+        for j in range(8):
             print("Start Stocking")
-            for i in range(8):
+            for i in range(4):
                 auto_stock(scale_range, top_left_position, bottom_right_position, template)
             print("Start Driving")
             for i in range(2):
                 count_taxi = auto_drive(scale_range, top_left_position, bottom_right_position, template, count_times, count_taxi, taxi_star, found_taxi)
+                np.save("count_taxi.npy", count_taxi)
+
         
         steps = 27 # (num of houses / 2) * 1.5
         # 刚开始不急着补货，因为都缺货，靠着进货功能就能实现
-        if round>=8:
-            if round%8 == 0:
+        if round>=4:
+            if round%2 == 0:
                 print("Start Backing")
                 back_to_left(scale_range, top_left_position, bottom_right_position, template, steps = 5)
                 print("Start Replenishing")
                 auto_replenish(scale_range, top_left_position, bottom_right_position, template, steps = steps, direction="goRight")
-            elif round%8 == 4:
+            elif round%2 == 1:
                 print("Start Backing")
                 back_to_right(scale_range, top_left_position, bottom_right_position, template, steps = 5)
                 print("Start Replenishing")
