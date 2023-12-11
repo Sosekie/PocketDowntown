@@ -1,6 +1,50 @@
 # Pocketdowntown
 
 ## Introduction
+"Pocketdowntown is my favorite mobile game in elementary school. At that time, I thought: driving a cab is a tedious process, if only there was an algorithm to automate the driving of cabs. When I got to graduate school, I realized that it wasn't that hard to implement these functions, so I started to try it out.
+This project also implements the auto-feed function.
+
+## Method&Update
+### 2023/11/18
+1. use an app such as `Anlink` to project a cell phone screen onto a computer;
+2. take the whole computer screenshot as input, judge whether there is a corresponding target image in the picture, get the position area of the corresponding image, and then input it to the `pyautogui` library to perform operations such as mouse clicking and pressing and releasing, in order to realize the auto-driving of the cab in the game;
+3. Instead of judging the location the passenger is going to and the current location during the driving process, traverse all the buildings by stopping every time a small step is taken (a trip takes about a minute).
+### 2023/11/19
+1. change to get the phone screen location instead of the whole image as input, speed up a lot, a template lookup took about 0.28 seconds;
+2. wrapped most of the functions to simplify the code;
+3. add the judgment of whether the vehicle can continue to drive during the driving process, instead of waiting for the end of a fixed period of time to stop clicking; the vehicle stopping time needs to satisfy 0.5 seconds before triggering the judgment of getting off the vehicle, and `0.5-last_time` can prevent the time wasted due to the judgment.
+4. the relative position of the destination is obtained by the position of the cab, and the destination digital picture is obtained;
+### 2023/11/20
+1. passes through the top two-thirds of the mask picture to find any of the blue squares below and clicks on them;
+2. look through the lower third of the mask image, and the left and right third of the area, to find if there is a store in the center area that needs to be stocked;
+3. double-click to enter the store, look for the "stock" option, click and close the window. 4. loop until the store is traversed;
+4. Loop until you have traversed all the actions you need to take.
+### 4. Loop until you have traversed all the actions you need to take.
+1. drag the screen to go through all the stores and find out if you need to restock yourself. 2. try to identify items that are sold out;
+2. try to identify sold out items but fail, instead click on them one by one to see if they can be restocked. 3. change to a binary lookup to see if they can be restocked;
+3. change to a bisection lookup, where each loop determines if it's left-to-right or vice versa, and only checks half the stores to shorten the time.
+### 2023/11/21
+1. "and a third of the area to the left and a third of the area to the right" was changed to two-fifths of each, because my phone screen shows up to five stores, so I only need to keep the middle store.
+
+## Pip list
+
+```bash
+pip install -r requirements.txt
+```
+
+## Run
+Execute the following command in the root directory to start the script:
+```bash
+python main.py
+```
+
+! [Result](screen.png)
+
+Chinese Version
+
+# Pocketdowntown
+
+## Introduction
 “口袋商业街”是我小学时候非常喜欢的手机经营游戏。那时，我就在想：开出租车过程很繁琐，如果有算法可以实现出租车的自动驾驶就好了。到了研究生阶段，我发现实现这些功能其实并不难，于是我开始动手尝试。
 此项目还实现了自动进货功能。
 
