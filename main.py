@@ -38,6 +38,11 @@ try:
     round = 0
     while(True):
 
+        if round == 0:
+            print("Start Stocking")
+            for i in range(40):
+                auto_stock(scale_range, top_left_position, bottom_right_position, template)
+
         for j in range(8):
             print("Start Stocking")
             for i in range(4):
